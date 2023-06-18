@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable = no ">
+    <link rel="stylesheet" href="style.css">
+    <title>Happpy Father's Day</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="img"></div>
+      <div class="rock"></div>
+      <div class="text"></div>
+      <div class="cloud"></div>
+      <p class="title">Happy Father's <br> Day </p>
+    </div>
+    <div class="box">
+      <p>"A father's love, a gift so pure, A guiding hand, always secure. In his presence, we find strength and grace, A pillar of support, in every embrace." </p>
+      <div class="enter">Enter</div>
+    </div>
+  </body>
+  <script>
+    let cont = document.querySelector(".container");
+    let song = new Audio("song.mp3");
+    let btn = document.querySelector(".enter");
+    let title = document.querySelector(".title");
+    let box = document.querySelector(".box");
+    btn.addEventListener("click", event => {
+      song.play();
+      cont.style.filter = "none";
+      title.style.animation = "ttl 5s forwards";
+      box.style.display = "none";
+    })
+
+    function getRandomNumber(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    function createStar() {
+      var star = document.createElement('div');
+      star.className = 'star';
+      star.style.left = getRandomNumber(0, window.innerWidth) + 'px';
+      star.style.top = window.innerHeight + 'px';
+      document.body.appendChild(star);
+      return star;
+    }
+
+    function animateStars() {
+      var stars = document.querySelectorAll('.star');
+      stars.forEach(function(star) {
+        var topPos = parseFloat(star.style.top);
+        if (topPos <= 0) {
+          star.remove();
+        } else {
+          topPos -= 1;
+          star.style.top = topPos + 'px';
+        }
+      });
+      if (Math.random() < 0.1) {
+        createStar();
+      }
+      requestAnimationFrame(animateStars);
+    }
+    animateStars();
+  </script>
+</html>
